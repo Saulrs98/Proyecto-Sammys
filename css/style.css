@@ -1,0 +1,206 @@
+
+body,
+html {
+    margin: 0;
+    padding: 0;
+}
+
+a{
+    text-decoration: none;
+}
+a:hover{
+    text-decoration: none;
+}
+
+footer{
+    align-items: center;
+}
+
+footer div a{
+    color: white;
+}
+.btn-genero-active a{
+    text-decoration: none;
+    color: white;
+}
+
+.body-cero{
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+.div-right{
+    background-color: rgb(240, 211, 240);
+    width: 70%;
+    padding: 50px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    border: 0;
+}
+.div-left{
+    width: 30%;
+    padding: 10px;
+    margin-top: auto;
+    margin-bottom: auto;
+    position: relative;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.title{    
+    color: white;
+    font-family: Montserrat;
+    font-size: 4em;
+    margin: 0;
+}
+
+.subtitle{
+    
+    color: white;
+    font-family: sans-serif;
+    font-size: 1em;
+    margin: 0;
+}
+
+.name-form{
+    color: rgb(192, 159, 192);
+    font-family: 'Bahnschrift Light';
+    font-size: 2em;
+    margin: 0;
+    padding: 0;
+}
+
+.text-box-form{
+    background-color: white;
+    margin: 1em;
+    margin-left: .3em;
+    padding-top: .3em;
+    padding-bottom: .3em;
+    border-radius: .4em;
+    align-items: center;
+}
+
+.btn-form{
+    margin-left: .3em;
+}
+
+/* MENU */
+.menu{
+    height: 123px;
+    align-items: center;
+}
+.menu-item{
+    width: 20%;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+}
+.menu-item-active{
+    border: 1px solid white;
+}
+.menu-buscar{
+    width: 50%;
+}
+
+.logo{
+    margin-right: 50px;
+}
+
+
+/*COLOR*/
+.bg-color-body{
+    background-color: rgb(192, 159, 192);
+}
+.bg-color-base{
+    text-decoration: none;
+    background-color: #CEBFDC;
+    color: white;
+}
+
+.bg-color-azul-1{
+    background-color: #D5ECF2;
+}
+
+.bg-color-azul-2{
+    background-color: #97D1DC;
+}
+
+.bg-color-footer{
+    background-color: #97D1DC;
+}
+
+.text-color-base{
+    text-decoration: none;
+    color: #CEBFDC;
+}
+
+/* CATALOGO*/
+.img-product{
+    width: 230px;
+    height: 230px;
+}
+
+.box-product{
+    padding-bottom: 5px;
+    padding-top: 5px;
+    text-align: center;
+}
+
+.box-product-info{
+    padding-bottom: 5px;
+    padding-top: 5px;
+    text-align: center;
+    align-items: flex-start;
+    background-color: #E2E2E1;
+}
+
+/* BOTONES */
+
+.btn-genero-active{
+    color: white;
+    background-color: #97D1DC;
+    border: 3px solid #97D1DC;
+    text-align: center;
+}
+
+.btn-genero{
+    color: #97D1DC;
+    background-color: white;
+    border: 3px solid #97D1DC;
+    text-align: center;
+}
+
+/* CHECK BOX */
+
+input[type="checkbox"]{
+    content: "";
+       display: inline-block;
+       vertical-align: -25%;
+       height: 4ex;
+       width: 4ex;
+       background-color: white;
+       border: 1px solid rgb(166, 166, 166);
+       border-radius: 4px;
+       margin-right: 0.5em;
+}
+
+
+/* labels */
+
+.text-type-1{
+    font-family: 'Bahnschrift';
+    color: #97D1DC;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.text-check{
+    font-family: 'Bahnschrift Light';
+    color: #97D1DC;
+    font-size: 1.5em;
+    padding-left: 20px;
+}
+
