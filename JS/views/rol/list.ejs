@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+</head>
+<body>
+    <%- include('../includes/header.ejs') %>
+    <div class="container">
+        <br>
+        <br>
+        <a class="btn btn-danger" href="/">Volver</a>
+        <br><br>
+        <div id="todos">
+            <table class="table">
+                <thead>
+                    <th>Rol</th>
+                    <th></th>
+                </thead>
+                <tbody>
+                    <% data.forEach(item =>{ %>
+                    <tr>
+                        <td><%= item.role %></td>
+                        <td class="text-right">
+                            <div class="dropdown">
+                                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Opciones
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" href="/rol/edit?id=<%= item.id %>">Editar</a>
+                                    <a class="dropdown-item" href="/rol/delete?id=<%= item.id %>">Eliminar</a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <%- include('../includes/footer.ejs') %>
+
+    
+</body>
+</html>

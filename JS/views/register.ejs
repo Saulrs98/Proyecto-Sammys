@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+   
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <br><br>
+        <h1>Registrarse</h1>
+        <br>
+        <% if (error != "") { %>
+            <div class="alert alert-danger alert-dismissable">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong>¡Error!</strong> <%= error %>
+            </div>
+        <% } %>
+        <form action="/register" method="post">
+            <div class="form-group">
+                <div class="col-md-6">
+                    <input class="form-control" type="text" name="id" id="id" hidden>
+                </div>                
+            </div>
+            <div class="form-group">
+                <div class="col-md-6">
+                    <label for="nombres">Nombres</label>
+                    <input class="form-control" type="text" name="nombres" id="nombres" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-6">
+                    <label for="nombres">Apellidos</label>
+                    <input class="form-control" type="text" name="apellidos" id="apellidos" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-6">
+                    <label for="nombres">Email</label>
+                    <input class="form-control" type="email" name="email" id="email" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-6">
+                    <label for="nombres">Dirección</label>
+                    <input class="form-control" type="text" name="direccion" id="direccion" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-6">
+                    <label for="nombres">Teléfono</label>
+                    <input class="form-control" type="text" name="telefono" id="telefono" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-6">
+                    <label for="nombres">Username</label>
+                    <input class="form-control" type="text" name="username" id="username" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-6">
+                    <label for="apellidos">Password</label>
+                    <input class="form-control" type="password" name="password" id="password" required>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <input class="btn btn-primary" type="submit" value="Registrar">
+                <a href="/" class="btn btn-danger"> Cancelar</a>
+            </div>
+        </form>
+    </div>
+    <%- include('includes/footer.ejs') %>
+</body>
+</html>
