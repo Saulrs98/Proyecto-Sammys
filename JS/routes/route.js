@@ -7,6 +7,7 @@ const usuarioController = require('../controllers/usuarioController');
 const rolController = require('../controllers/rolController');
 const categoriaController = require('../controllers/categoriaController');
 const productoController = require('../controllers/productoController');
+const cuentaController = require('../controllers/cuentaController');
 
 const router = Router();
 
@@ -52,6 +53,14 @@ router.get('/producto/edit', isAuth, productoController.edit);
 router.get('/producto/delete', isAuth, productoController.delete);
 router.post('/producto/save', isAuth, productoController.save);
 router.post('/producto/update', isAuth, productoController.update);
+
+/* Cuenta */
+router.get('/cuenta/list', isAuth, cuentaController.list);
+router.get('/cuenta/add', isAuth, cuentaController.add);
+router.get('/cuenta/edit', isAuth, cuentaController.edit);
+router.get('/cuenta/delete', isAuth, cuentaController.delete);
+router.post('/cuenta/save', isAuth, cuentaController.save);
+router.post('/cuenta/update', isAuth, cuentaController.update);
 
 router.use(homeController.error404);
 
