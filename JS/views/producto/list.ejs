@@ -12,37 +12,35 @@
     <div class="container">
         <br>
         <br>
-        <h1>Lista de usuarios</h1>
-        <br>
+        <a class="btn btn-danger" href="/">Volver</a>
+        <br><br>
         <div id="todos">
             <table class="table">
                 <thead>
-                    <th>Nombres</th>
-                    <th>Apellidos</th>
-                    <th>Email</th>
-                    <th>Dirección</th>
-                    <th>Teléfono</th>
-                    <th>Username</th>
-                    <th>Rol</th>
+                    <th>Nombre</th>
+                    <th>Precio</th>
+                    <th>Stock</th>
+                    <th>Género</th>
+                    <th>Categoría</th>
+                    <th>Imagen</th>                    
                     <th></th>
                 </thead>
                 <tbody>
                     <% data.forEach(item =>{ %>
                     <tr>
-                        <td><%= item.nombres %></td>
-                        <td><%= item.apellidos %></td>
-                        <td><%= item.email %></td>
-                        <td><%= item.direccion %></td>
-                        <td><%= item.telefono %></td>
-                        <td><%= item.username %></td>
-                        <td><%= item.role %></td>
+                        <td><%= item.nombre %></td>
+                        <td><%= item.precio %></td>
+                        <td><%= item.stock %></td>
+                        <td><%= item.genero %></td>
+                        <td><%= item.categoria_nombre %></td>
+                        <td><img src="<%= item.url %>" alt="" width="100"></td>
                         <td class="text-right">
                             <div class="dropdown">
                                 <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Opciones
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" href="/usuario/delete?id=<%= item.id %>">Eliminar</a>
+                                    <a class="dropdown-item" href="/producto/delete?id=<%= item.id %>">Eliminar</a>
                                 </div>
                             </div>
                         </td>

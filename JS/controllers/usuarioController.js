@@ -5,7 +5,6 @@ const bcrypt = require("bcryptjs");
 exports.list = (request, response, next) => {
   Usuario.fetchAll()
     .then(([data, fieldData]) => {
-      
       response.render("usuario/list", { data: data });
     })
     .catch((err) => console.log(err));
@@ -31,31 +30,25 @@ exports.save = (request, response, next) => {
 
   Usuario.encriptarPassword(password)
     .then((hash) => {
-      Rol.search(rol_id)
-        .then(([data, fieldData]) => {
-          const usuario = new Usuario(
-            0,
-            nombres,
-            apellidos,
-            email,
-            direccion,
-            telefono,
-            username,
-            hash,
-            data[0]
-          );
+      const usuario = new Usuario(
+        0,
+        nombres,
+        apellidos,
+        email,
+        direccion,
+        telefono,
+        username,
+        hash,
+        rol_id
+      );
 
-          usuario
-            .save()
-            .then(() => {
-              response.redirect("/usuario/list");
-            })
-            .catch((err) => {
-              response.render("usuario/add", { error: err.sqlMessage });
-            });
+      usuario
+        .save()
+        .then(() => {
+          response.redirect("/usuario/list");
         })
         .catch((err) => {
-          response.render("usuario/add", { error: err });
+          response.render("usuario/add", { error: err.sqlMessage });
         });
     })
     .catch((err) => {
@@ -122,31 +115,25 @@ exports.saveRegister = (request, response, next) => {
 
   Usuario.encriptarPassword(password)
     .then((hash) => {
-      Rol.search(rol_id)
-        .then(([data, fieldData]) => {
-          const usuario = new Usuario(
-            0,
-            nombres,
-            apellidos,
-            email,
-            direccion,
-            telefono,
-            username,
-            hash,
-            data[0]
-          );
+      const usuario = new Usuario(
+        0,
+        nombres,
+        apellidos,
+        email,
+        direccion,
+        telefono,
+        username,
+        hash,
+        rol_id
+      );
 
-          usuario
-            .save()
-            .then(() => {
-              response.redirect("/login");
-            })
-            .catch((err) => {
-              response.render("register", { error: err.sqlMessage });
-            });
+      usuario
+        .save()
+        .then(() => {
+          response.redirect("/login");
         })
         .catch((err) => {
-          response.render("register", { error: "El Rol no existe" });
+          response.render("register", { error: err.sqlMessage });
         });
     })
     .catch((err) => {

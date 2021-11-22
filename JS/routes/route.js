@@ -6,6 +6,7 @@ const homeController = require('../controllers/homeController');
 const usuarioController = require('../controllers/usuarioController');
 const rolController = require('../controllers/rolController');
 const categoriaController = require('../controllers/categoriaController');
+const productoController = require('../controllers/productoController');
 
 const router = Router();
 
@@ -43,6 +44,14 @@ router.get('/categoria/edit', isAuth, categoriaController.edit);
 router.get('/categoria/delete', isAuth, categoriaController.delete);
 router.post('/categoria/save', isAuth, categoriaController.save);
 router.post('/categoria/update', isAuth, categoriaController.update);
+
+/* Producto */
+router.get('/producto/list', isAuth, productoController.list);
+router.get('/producto/add', isAuth, productoController.add);
+router.get('/producto/edit', isAuth, productoController.edit);
+router.get('/producto/delete', isAuth, productoController.delete);
+router.post('/producto/save', isAuth, productoController.save);
+router.post('/producto/update', isAuth, productoController.update);
 
 router.use(homeController.error404);
 

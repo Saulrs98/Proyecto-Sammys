@@ -12,7 +12,7 @@ module.exports = class Usuario {
     telefono,
     username,
     password,
-    rol
+    rol_id
   ) {
     this.id = id;
     this.nombres = nombres;
@@ -22,7 +22,7 @@ module.exports = class Usuario {
     this.telefono = telefono;
     this.username = username;
     this.password = password;
-    this.rol = rol;
+    this.rol_id = rol_id;
   }
 
   save() {
@@ -37,7 +37,7 @@ module.exports = class Usuario {
       this.telefono,
       this.username,
       this.password,
-      this.rol.id
+      this.rol_id,
     ]);
   }
 
@@ -55,7 +55,7 @@ module.exports = class Usuario {
       this.telefono,
       this.username,
       this.password,
-      this.rol.id,
+      this.rol_id,
       this.id,
     ]);
   }
@@ -77,6 +77,8 @@ module.exports = class Usuario {
   }
 
   static fetchAll() {
-    return db.execute("SELECT * FROM Usuario");
+    const query = `SELECT * FROM Usuario u INNER JOIN Rol r ON r.id = u.rol_id `;
+    const params = [];
+    return db.execute(query, params);
   }
 };

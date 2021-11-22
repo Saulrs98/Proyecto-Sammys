@@ -33,6 +33,8 @@ app.set('views', __dirname + '/views');
 app.use(express.static(path.join(__dirname, 'public/')));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
+app.use(multer({ storage: fileStorage, fileFilter: fileFilter }).single('imgproducto'));  
+
 app.use(session({
     secret: 'kJSDLKJshdflMOEWCD03DIDAPI3WDPpoijp98jpjjkiojp0LKSD0knlnl', 
     resave: false, //La sesión no se guardará en cada petición, sino sólo se guardará si algo cambió 
