@@ -23,3 +23,7 @@ exports.reset = (request, response, next) => {
     response.redirect("/"); //Este código se ejecuta cuando la sesión se elimina.
   });
 };
+
+exports.error404 = (request, response, next) => {
+  response.status(404).render("404"); 
+}
