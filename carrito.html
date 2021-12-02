@@ -18,23 +18,21 @@
 
             // Funciones
 
-            /**
-            * Evento para añadir un producto al carrito de la compra
-            */
+            //Evento para añadir un producto al carrito de la compra
             function anyadirProductoAlCarrito(evento) {
                 // Anyadimos el Nodo a nuestro carrito
                 carrito.push(evento.target.getAttribute('marcador'))
-                // Calculo el total
+
                 calcularTotal();
-                // Actualizamos el carrito 
+
                 renderizarCarrito();
-                // Actualizamos el LocalStorage
+
                 guardarCarritoEnLocalStorage();
             }
 
-            /**
-            * Dibuja todos los productos guardados en el carrito
-            */
+            /*
+            Dibuja todos los productos guardados en el carrito
+            */ 
             function renderizarCarrito() {
                 // Vaciamos todo el html
                 DOMcarrito.textContent = '';
