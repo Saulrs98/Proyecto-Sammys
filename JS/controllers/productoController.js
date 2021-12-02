@@ -2,20 +2,39 @@ const Producto = require("../models/producto");
 const Categoria = require("../models/categoria");
 
 exports.list = (request, response, next) => {
-  Producto.fetchAll()
+  let filter = request.query.filter;
+  let error = request.query.error;
+  let success = request.query.success;
+  if (!filter) {
+    filter = "";
+  }
+  Producto.fetchAll(filter)
     .then(([data, fieldData]) => {
-        console.log(data);
-      response.render("producto/list", { data: data });
+      response.render("producto/list", {
+        data: data,
+        filter: filter,
+        success: success,
+        error: error,
+      });
     })
-    .catch((err) => console.log(err));
+    .catch((err) => {
+      response.render("producto/list", {
+        data: [],
+        filter: filter,
+        success: success,
+        error: err.sqlMessage,
+      });
+    });
 };
 
 exports.add = (request, response, next) => {
-  Categoria.fetchAll()
+  Categoria.fetchAll("")
     .then(([categorias, fieldData]) => {
-      response.render("producto/add", { categorias: categorias });
+      response.render("producto/add", { categorias: categorias, error: null });
     })
-    .catch((err) => console.log(err));
+    .catch((err) => {
+      response.redirect("producto/list");
+    });
 };
 
 exports.save = (request, response, next) => {
@@ -36,41 +55,90 @@ exports.save = (request, response, next) => {
     genero,
     url,
     categoria_id
-    );
+  );
 
-    producto
-        .save()
-        .then(() => {
-          response.redirect("/producto/list");
+  producto
+    .save()
+    .then(() => {
+      response.redirect("/producto/list?success=agregado");
+    })
+    .catch((err) => {
+      Categoria.fetchAll("")
+        .then(([categorias, fieldData]) => {
+          response.render("producto/add", {
+            categorias: categorias,
+            error: err.sqlMessage,
+          });
         })
         .catch((err) => {
-          response.render("producto/add", { error: err.sqlMessage });
+          response.redirect("producto/list");
         });
-    
+    });
 };
 
 exports.edit = (request, response, next) => {
   const id = request.query.id;
   Producto.search(id)
     .then(([data, fieldData]) => {
-      response.render("producto/edit", { item: data[0] });
+      Categoria.fetchAll("")
+        .then(([categorias, fieldData]) => {
+          response.render("producto/edit", {
+            item: data[0],
+            categorias: categorias,
+            error: null,
+          });
+        })
+        .catch((err) => {
+          response.redirect("producto/list");
+        });
     })
-    .catch((err) => console.log(err));
+    .catch((err) => {
+      response.redirect("producto/list");
+    });
 };
 
 exports.update = (request, response, next) => {
-  /** siguiente version */
   const id = request.body.id;
   const nombre = request.body.nombre;
+  const descripcion = request.body.descripcion;
+  const precio = request.body.precio;
+  const stock = request.body.stock;
+  const genero = request.body.genero;
+  let url = "/";
+  if(typeof request.file !== 'undefined'){
+    url += request.file.path;
+  }
+  console.log(url);
+  const categoria_id = request.body.categoria_id;
 
-  const producto = new Producto(id, nombre);
+  const producto = new Producto(
+    id,
+    nombre,
+    descripcion,
+    precio,
+    stock,
+    genero,
+    url,
+    categoria_id
+  );
+
   producto
     .update()
     .then(() => {
-      response.redirect("/producto/list");
+      response.redirect("/producto/list?success=actualizado");
     })
     .catch((err) => {
-      response.render("producto/edit", { error: err.sqlMessage });
+      Categoria.fetchAll("")
+        .then(([categorias, fieldData]) => {
+          response.render("producto/edit", {
+            item: producto,
+            categorias: categorias,
+            error: err.sqlMessage,
+          });
+        })
+        .catch((err) => {
+          response.redirect("producto/list");
+        });
     });
 };
 
@@ -79,8 +147,11 @@ exports.delete = (request, response, next) => {
   Producto.delete(id)
     .then(([result, fieldData]) => {
       if (result) {
-        response.redirect("/producto/list");
+        response.redirect("/producto/list?success=eliminado");
       }
     })
-    .catch((err) => console.log(err));
+    .catch((err) => {
+      console.log(err.sqlMessage);
+      response.redirect("/producto/list?error=true");
+    });
 };

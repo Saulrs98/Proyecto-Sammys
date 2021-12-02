@@ -27,59 +27,58 @@
                     <strong>¡Error!</strong> No se puede eliminar el Rol
                 </div>
             <%}%>
-                    
-                    <form action="/rol/list" method="get">
-                        <div class="form-row">
-                            <div class="col-md-12">
-                                <label class="control-label">Buscar por Rol</label>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="col-md-6">
-                                <input class="form-control" type="text" name="filter" value="<%= filter%>" />
-                            </div>
-                            <div class="col-md-2">
-                                <input type="submit" name="accion" value="Buscar" class="btn btn-danger" />
-                            </div>
-                            <div class="text-right col-md-4">
-                                <a href="/rol/add" class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"></i>
-                                    Crear Nuevo</a>
-                            </div>
-                        </div>
-                    </form>
-                    <br>
-                    <div>
-                        <table class="table">
-                            <thead>
-                                <th>Rol</th>
-                                <th></th>
-                            </thead>
-                            <tbody>
-                                <% data.forEach(item=>{ %>
-                                    <tr>
-                                        <td>
-                                            <%= item.role %>
-                                        </td>
-                                        <td class="text-right">
-                                            <div class="dropdown">
-                                                <button class="btn btn-primary dropdown-toggle" type="button"
-                                                    id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-                                                    aria-expanded="false">
-                                                    Opciones
-                                                </button>
-                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                    <a class="dropdown-item"
-                                                        href="/rol/edit?id=<%= item.id %>">Editar</a>
-                                                    <a class="dropdown-item"
-                                                        href="/rol/delete?id=<%= item.id %>">Eliminar</a>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <% }) %>
-                            </tbody>
-                        </table>
+
+            <form action="/rol/list" method="get">
+                <div class="form-row">
+                    <div class="col-md-12">
+                        <label class="control-label">Buscar por Rol</label>
                     </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-6">
+                        <input class="form-control" type="text" name="filter" value="<%= filter%>" />
+                    </div>
+                    <div class="col-md-2">
+                        <input type="submit" name="accion" value="Buscar" class="btn btn-danger" />
+                    </div>
+                    <div class="text-right col-md-4">
+                        <a href="/rol/add" class="btn btn-success"><i class="fa fa-plus"
+                                aria-hidden="true"></i>
+                            Crear Nuevo</a>
+                    </div>
+                </div>
+            </form>
+            <br>
+            <div>
+                <table class="table">
+                    <thead>
+                        <th>Rol</th>
+                        <th></th>
+                    </thead>
+                    <tbody>
+                        <% data.forEach(item=>{ %>
+                            <tr>
+                                <td>
+                                    <%= item.role %>
+                                </td>
+                                <td class="text-right">
+                                    <div class="dropdown">
+                                        <button class="btn btn-primary dropdown-toggle" type="button"
+                                            id="dropdownMenuButton" data-toggle="dropdown"
+                                            aria-haspopup="true" aria-expanded="false">
+                                            Opciones
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item" href="/rol/edit?id=<%= item.id %>">Editar</a>
+                                            <a class="dropdown-item" href="/rol/delete?id=<%= item.id %>">Eliminar</a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <% }) %>
+                    </tbody>
+                </table>
+            </div>
         </div>
         <%- include('../includes/footer.ejs') %>
 

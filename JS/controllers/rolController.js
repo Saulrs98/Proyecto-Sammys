@@ -13,11 +13,14 @@ exports.list = (request, response, next) => {
         data: data,
         filter: filter,
         success: success,
-        error: error,
+        error: error
       });
     })
     .catch((err) => {
-      response.render("rol/list", { error: err.sqlMessage });
+      response.render("rol/list", { data: [],
+        filter: filter,
+        success: success,
+        error: err.sqlMessage });
     });
 };
 

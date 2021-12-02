@@ -11,10 +11,43 @@
     <%- include('../includes/header.ejs') %>
     <div class="container">
         <br>
+        <h3>Lista de Productos</h3>
+        <% if (success){ %>
+            <div class="alert alert-success alert-dismissable">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong>¡Éxito!</strong> Producto <%=success%> correctamente
+            </div>
+        <%}%>
+
+        <% if (error){ %>
+            <div class="alert alert-danger alert-dismissable">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong>¡Error!</strong> No se puede eliminar el Producto
+            </div>
+        <%}%>
+
+        <form action="/producto/list" method="get">
+            <div class="form-row">
+                <div class="col-md-12">
+                    <label class="control-label">Buscar por Nombre o Categoría</label>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-md-6">
+                    <input class="form-control" type="text" name="filter" value="<%= filter%>" />
+                </div>
+                <div class="col-md-2">
+                    <input type="submit" name="accion" value="Buscar" class="btn btn-danger" />
+                </div>
+                <div class="text-right col-md-4">
+                    <a href="/producto/add" class="btn btn-success"><i class="fa fa-plus"
+                            aria-hidden="true"></i>
+                        Crear Nuevo</a>
+                </div>
+            </div>
+        </form>
         <br>
-        <a class="btn btn-danger" href="/">Volver</a>
-        <br><br>
-        <div id="todos">
+        <div>
             <table class="table">
                 <thead>
                     <th>Nombre</th>
@@ -40,6 +73,7 @@
                                     Opciones
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" href="/producto/edit?id=<%= item.id %>">Editar</a>
                                     <a class="dropdown-item" href="/producto/delete?id=<%= item.id %>">Eliminar</a>
                                 </div>
                             </div>

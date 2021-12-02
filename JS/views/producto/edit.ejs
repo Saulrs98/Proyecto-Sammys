@@ -10,7 +10,7 @@
     <%- include('../includes/header.ejs') %>
     <div class="container">
         <br>
-        <h3>Crear Producto</h3>
+        <h3>Editar Producto</h3>
         <% if (error){ %>
             <div class="alert alert-danger alert-dismissable">
                 <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -18,34 +18,34 @@
                 <%=error%>
             </div>
         <%}%>
-        <form action="/producto/save" method="post" enctype="multipart/form-data">
+        <form action="/producto/update" method="post" enctype="multipart/form-data">
             <div class="form-group">
                 <div class="col-md-6">
-                    <input class="form-control" type="text" name="id" id="id" hidden>
+                    <input class="form-control" type="text" name="id" value="<%= item.id %>" hidden>
                 </div>                
             </div>
             <div class="form-group">
                 <div class="col-md-6">
                     <label for="nombre">Nombre</label>
-                    <input class="form-control" type="text" name="nombre" id="nombre" required>
+                    <input class="form-control" type="text" name="nombre" value="<%= item.nombre %>" required>
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-md-6">
                     <label for="nombre">Descripción</label>
-                    <input class="form-control" type="text" name="descripcion" id="descripcion" required>
+                    <input class="form-control" type="text" name="descripcion" value="<%= item.descripcion %>" required>
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-md-6">
                     <label for="nombre">Precio</label>
-                    <input class="form-control" type="number" step="0.01" min="0" name="precio" id="precio" required>
+                    <input class="form-control" type="number" step="0.01" min="0" name="precio" value="<%= item.precio %>" required>
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-md-6">
                     <label for="nombre">Stock</label>
-                    <input class="form-control" type="number" name="stock" min="0" id="stock" required>
+                    <input class="form-control" type="number" name="stock" min="0" value="<%= item.stock %>" required>
                 </div>
             </div>
             <div class="form-group">
@@ -63,16 +63,25 @@
                     <label for="nombres">Categoría</label>
                     <select class="form-control" name="categoria_id" id="categoria_id" required>
                         <option value="">Seleccionar categoría</option>
-                        <% categorias.forEach(item =>{ %>
-                            <option value="<%= item.id%>"><%= item.nombre %></option>
-                        <%})%>
+                        <% categorias.forEach(element=>{
+                            if(element.id == item.categoria_id ){
+                            %>
+                            <option value="<%= element.id%>" selected>
+                                <%= element.nombre %>
+                            </option>
+                            <% }else{ %>
+                                <option value="<%= element.id%>">
+                                    <%= element.nombre %>
+                                </option>
+                                <% } })%>
                     </select>
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-md-6">
-                    <label for="nombre">Archivo</label>
-                    <input class="form-control" type="file" name="imgproducto" id="imgproducto" required>
+                    <label for="nombre">Imagen</label><br> 
+                    <img src="<%= item.url %>" alt="" height="350">                   
+                    <input class="form-control" type="file" name="imgproducto" id="imgproducto">
                 </div>
             </div>
             <div class="col-md-12">
