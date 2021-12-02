@@ -1,15 +1,28 @@
 const Categoria = require("../models/categoria");
 
 exports.list = (request, response, next) => {
-  Categoria.fetchAll()
+  let filter = request.query.filter;
+  let error = request.query.error;
+  let success = request.query.success;
+  if (!filter) {
+    filter = "";
+  }
+  Categoria.fetchAll(filter)
     .then(([data, fieldData]) => {
-      response.render("categoria/list", { data: data });
+      response.render("categoria/list", {
+        data: data,
+        filter: filter,
+        success: success,
+        error: error,
+      });
     })
-    .catch((err) => console.log(err));
+    .catch((err) => {
+      response.render("categoria/list", { error: err.sqlMessage });
+    });
 };
 
 exports.add = (request, response, next) => {
-  response.render("categoria/add");
+  response.render("categoria/add", { error: null });
 };
 
 exports.save = (request, response, next) => {
@@ -19,7 +32,7 @@ exports.save = (request, response, next) => {
   categoria
     .save()
     .then(() => {
-      response.redirect("/categoria/list");
+      response.redirect("/categoria/list?success=agregado");
     })
     .catch((err) => {
       response.render("categoria/add", { error: err.sqlMessage });
@@ -27,38 +40,41 @@ exports.save = (request, response, next) => {
 };
 
 exports.edit = (request, response, next) => {
-    const id = request.query.id;
-    Categoria.search(id)
+  const id = request.query.id;
+  Categoria.search(id)
     .then(([data, fieldData]) => {
-        response.render("categoria/edit", {item: data[0]});
+      response.render("categoria/edit", { item: data[0], error: null });
     })
-    .catch((err) => console.log(err));    
-  };
+    .catch((err) => {
+      response.redirect("categoria/list");
+    });
+};
 
 exports.update = (request, response, next) => {
-    const id = request.body.id;
-    const nombre = request.body.nombre;
-  
-    const categoria = new Categoria(id, nombre);
-    categoria
-      .update()
-      .then(() => {
-        response.redirect("/categoria/list");
-      })
-      .catch((err) => {
-        response.render("categoria/edit", { error: err.sqlMessage });
-      });
-  };
+  const id = request.body.id;
+  const nombre = request.body.nombre;
+
+  const categoria = new Categoria(id, nombre);
+  categoria
+    .update()
+    .then(() => {
+      response.redirect("/categoria/list?success=actualizado");
+    })
+    .catch((err) => {
+      response.render("categoria/edit", { item: categoria, error: err.sqlMessage });
+    });
+};
 
 exports.delete = (request, response, next) => {
   const id = request.query.id;
   Categoria.delete(id)
     .then(([result, fieldData]) => {
       if (result) {
-        response.redirect("/categoria/list");
+        response.redirect("/categoria/list?success=eliminado");
       }
     })
-    .catch((err) => console.log(err));
+    .catch((err) => {
+      console.log(err.sqlMessage);
+      response.redirect("/categoria/list?error=true");
+    });
 };
-
-

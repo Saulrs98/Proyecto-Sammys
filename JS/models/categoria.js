@@ -24,7 +24,8 @@ module.exports = class Categoria {
     return db.execute("SELECT * FROM Categoria WHERE id = ?", [id]);
   }
 
-  static fetchAll() {
-    return db.execute("SELECT * FROM Categoria");
+  static fetchAll(filter) {
+    const query = `SELECT * FROM Categoria WHERE nombre LIKE '` + filter + `%'`;
+    return db.execute(query);
   }
 };

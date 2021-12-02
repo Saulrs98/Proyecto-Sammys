@@ -1,15 +1,28 @@
 const Cuenta = require("../models/cuenta");
 
 exports.list = (request, response, next) => {
-  Cuenta.fetchAll()
+  let filter = request.query.filter;
+  let error = request.query.error;
+  let success = request.query.success;
+  if (!filter) {
+    filter = "";
+  }
+  Cuenta.fetchAll(filter)
     .then(([data, fieldData]) => {
-      response.render("cuenta/list", { data: data });
+      response.render("cuenta/list", {
+        data: data,
+        filter: filter,
+        success: success,
+        error: error,
+      });
     })
-    .catch((err) => console.log(err));
+    .catch((err) => {
+      response.render("cuenta/list", { error: err.sqlMessage });
+    });
 };
 
 exports.add = (request, response, next) => {
-  response.render("cuenta/add");
+  response.render("cuenta/add", { error: null });
 };
 
 exports.save = (request, response, next) => {
@@ -20,7 +33,7 @@ exports.save = (request, response, next) => {
   cuenta
     .save()
     .then(() => {
-      response.redirect("/cuenta/list");
+      response.redirect("/cuenta/list?success=agregado");
     })
     .catch((err) => {
       response.render("cuenta/add", { error: err.sqlMessage });
@@ -31,9 +44,11 @@ exports.edit = (request, response, next) => {
   const id = request.query.id;
   Cuenta.search(id)
     .then(([data, fieldData]) => {
-      response.render("cuenta/edit", { item: data[0] });
+      response.render("cuenta/edit", { item: data[0], error: null });
     })
-    .catch((err) => console.log(err));
+    .catch((err) => {
+      response.redirect("cuenta/list");
+    });
 };
 
 exports.update = (request, response, next) => {
@@ -45,10 +60,10 @@ exports.update = (request, response, next) => {
   cuenta
     .update()
     .then(() => {
-      response.redirect("/cuenta/list");
+      response.redirect("/cuenta/list?success=actualizado");
     })
     .catch((err) => {
-      response.render("cuenta/edit", { error: err.sqlMessage });
+      response.render("cuenta/edit", { item: cuenta, error: err.sqlMessage });
     });
 };
 
@@ -57,8 +72,11 @@ exports.delete = (request, response, next) => {
   Cuenta.delete(id)
     .then(([result, fieldData]) => {
       if (result) {
-        response.redirect("/cuenta/list");
+        response.redirect("/cuenta/list?success=eliminado");
       }
     })
-    .catch((err) => console.log(err));
+    .catch((err) => {
+      console.log(err.sqlMessage);
+      response.redirect("/cuenta/list?error=true");
+    });
 };

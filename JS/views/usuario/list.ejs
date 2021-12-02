@@ -11,10 +11,41 @@
     <%- include('../includes/header.ejs') %>
     <div class="container">
         <br>
+        <h3>Lista de Usuarios</h3>
+        <% if (success){ %>
+            <div class="alert alert-success alert-dismissable">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong>¡Éxito!</strong> Usuario <%=success%> correctamente
+            </div>
+        <%}%>
+
+        <% if (error){ %>
+            <div class="alert alert-danger alert-dismissable">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong>¡Error!</strong> No se puede eliminar el Usuario
+            </div>
+        <%}%>
+        <form action="/usuario/list" method="get">
+            <div class="form-row">
+                <div class="col-md-12">
+                    <label class="control-label">Buscar por Username</label>                        
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-md-6">
+                    <input class="form-control" type="text" name="filter" value="<%= filter%>"/>
+
+                </div>
+                <div class="col-md-2">
+                    <input type="submit" name="accion" value="Buscar" class="btn btn-danger" />
+                </div>
+                <div class="text-right col-md-4">
+                    <a href="/usuario/add" class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"></i> Crear Nuevo</a>
+                </div>
+            </div>
+        </form>
         <br>
-        <h1>Lista de usuarios</h1>
-        <br>
-        <div id="todos">
+        <div>
             <table class="table">
                 <thead>
                     <th>Nombres</th>
@@ -43,6 +74,7 @@
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                     <a class="dropdown-item" href="/usuario/delete?id=<%= item.id %>">Eliminar</a>
+                                    <a class="dropdown-item" href="/usuario/edit?id=<%= item.id %>">Editar</a>
                                 </div>
                             </div>
                         </td>

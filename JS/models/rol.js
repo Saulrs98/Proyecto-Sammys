@@ -24,7 +24,8 @@ module.exports = class Rol {
     return db.execute("SELECT * FROM Rol WHERE id = ?", [id]);
   }
 
-  static fetchAll() {
-    return db.execute("SELECT * FROM Rol");
+  static fetchAll(filter) {
+    const query = `SELECT * FROM Rol WHERE role LIKE '` + filter + `%'`;
+    return db.execute(query);
   }
 };

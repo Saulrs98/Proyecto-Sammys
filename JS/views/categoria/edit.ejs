@@ -9,9 +9,14 @@
 <body>
     <%- include('../includes/header.ejs') %>
     <div class="container">
-        <br><br>
-        <h1>Editar Categoría</h1>
         <br>
+        <h3>Editar Categoría</h3>
+        <% if (error){ %>
+            <div class="alert alert-danger alert-dismissable">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong>¡Error!</strong> <%=error%>
+            </div>
+        <%}%>
         <form action="/categoria/update" method="post">
             <div class="form-group">
                 <div class="col-md-6">
@@ -26,7 +31,7 @@
             </div>
             <div class="col-md-12">
                 <input class="btn btn-primary" type="submit" value="Actualizar">
-                <a href="/" class="btn btn-danger"> Volver</a>
+                <a href="/categoria/list" class="btn btn-danger"> Cancelar</a>
             </div>
         </form>
     </div>

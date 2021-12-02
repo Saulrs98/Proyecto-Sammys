@@ -26,7 +26,9 @@ router.post('/register', usuarioController.saveRegister);
 
 /* Usuario */
 router.get('/usuario/add', isAuth, usuarioController.add);
+router.get('/usuario/edit', isAuth, usuarioController.edit);
 router.post('/usuario/save', usuarioController.save);
+router.post('/usuario/update', usuarioController.update);
 router.get('/usuario/list', isAuth, usuarioController.list);
 router.get('/usuario/delete', isAuth, usuarioController.delete);
 

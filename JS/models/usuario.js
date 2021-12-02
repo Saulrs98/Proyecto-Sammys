@@ -29,7 +29,7 @@ module.exports = class Usuario {
     const query =
       "INSERT INTO Usuario (nombres, apellidos, email, direccion, telefono, " +
       "username, password, rol_id) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
-    return db.execute(query, [
+    const params = [
       this.nombres,
       this.apellidos,
       this.email,
@@ -38,16 +38,41 @@ module.exports = class Usuario {
       this.username,
       this.password,
       this.rol_id,
-    ]);
+    ];
+    return db.execute(query, params);
   }
 
   update() {
+    if(this.password != null){
+      return this.updateWithPassword();
+    }
+    const query =
+      "UPDATE Usuario SET " +
+      "nombres = ?, apellidos = ?, email = ?, direccion = ?, telefono = ?, username = ?, rol_id = ? " +
+      "WHERE id = ?";
+
+    const params = [
+      this.nombres,
+      this.apellidos,
+      this.email,
+      this.direccion,
+      this.telefono,
+      this.username,
+      this.rol_id,
+      this.id,
+    ];
+
+    return db.execute(query, params);
+  }
+
+  updateWithPassword() {
     const query =
       "UPDATE Usuario SET " +
       "nombres = ?, apellidos = ?, email = ?, direccion = ?, telefono = ?, " +
       "username = ?, password = ?, rol_id = ? " +
       "WHERE id = ?";
-    db.execute(query, [
+
+    const params = [
       this.nombres,
       this.apellidos,
       this.email,
@@ -57,7 +82,9 @@ module.exports = class Usuario {
       this.password,
       this.rol_id,
       this.id,
-    ]);
+    ];
+
+    return db.execute(query, params);
   }
 
   static searchByUsuarioname(username) {
@@ -73,12 +100,18 @@ module.exports = class Usuario {
   }
 
   static search(id) {
-    return db.execute("SELECT * FROM Usuario WHERE id = ?", [id]);
+    const query = `SELECT u.id, u.nombres, u.apellidos, u.email, u.direccion, u.telefono, u.username,
+    u.password, u.rol_id, r.role  
+    FROM Usuario u INNER JOIN Rol r ON r.id = u.rol_id WHERE u.id = ?`;
+    const params = [id];
+    return db.execute(query, params);
   }
 
-  static fetchAll() {
-    const query = `SELECT * FROM Usuario u INNER JOIN Rol r ON r.id = u.rol_id `;
-    const params = [];
-    return db.execute(query, params);
+  static fetchAll(filter) {
+    const query = `SELECT u.id, u.nombres, u.apellidos, u.email, u.direccion, u.telefono, u.username,
+    u.password, u.rol_id, r.role 
+    FROM Usuario u INNER JOIN Rol r ON r.id = u.rol_id 
+    WHERE u.username LIKE '` + filter + `%'`;
+    return db.execute(query);
   }
 };

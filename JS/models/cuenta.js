@@ -25,7 +25,8 @@ module.exports = class Cuenta {
     return db.execute("SELECT * FROM Cuentas WHERE id = ?", [id]);
   }
 
-  static fetchAll() {
-    return db.execute("SELECT * FROM Cuentas");
+  static fetchAll(filter) {
+    const query = `SELECT * FROM Cuentas WHERE numero_cuenta LIKE '` + filter + `%'`;
+    return db.execute(query);
   }
 };
