@@ -1,15 +1,9 @@
 exports.home = (request, response, next) => {
-  if (!request.session.contador) {
-    request.session.contador = 0;
-  }
-  response.render("home", {
-    titulo: "LAB 20: Autenticación",
-    contador: request.session.contador,
-  });
+  response.render("home");
 };
 
-exports.index = (request, response, next) => {
-  response.render("index", {error: ""});
+exports.login = (request, response, next) => {
+  response.render("login", {error: ""});
 };
 
 exports.logout = (request, response, next) => {
@@ -20,7 +14,7 @@ exports.logout = (request, response, next) => {
 
 exports.reset = (request, response, next) => {
   request.session.destroy(() => {
-    response.redirect("/"); //Este código se ejecuta cuando la sesión se elimina.
+    response.redirect("/"); 
   });
 };
 

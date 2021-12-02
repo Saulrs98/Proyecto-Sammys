@@ -8,16 +8,21 @@ const rolController = require('../controllers/rolController');
 const categoriaController = require('../controllers/categoriaController');
 const productoController = require('../controllers/productoController');
 const cuentaController = require('../controllers/cuentaController');
+const clienteController = require('../controllers/clienteController');
 
 const router = Router();
 
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({extended:true}));
 
-router.get('', isAuth, homeController.home);
+/* Cliente */
+router.get('', clienteController.index);
+router.get('/catalogo', clienteController.catalogo);
+
+router.get('/home', isAuth, homeController.home);
 
 /** Auth */
-router.get('/login', homeController.index);
+router.get('/login', homeController.login);
 router.get('/logout', homeController.logout);
 
 router.get('/register', usuarioController.register);
@@ -65,5 +70,9 @@ router.post('/cuenta/save', isAuth, cuentaController.save);
 router.post('/cuenta/update', isAuth, cuentaController.update);
 
 router.use(homeController.error404);
+
+
+
+
 
 module.exports = router;

@@ -178,9 +178,14 @@ exports.login = (request, response, next) => {
             if (doMatch) {
               request.session.isLoggedIn = true;
               request.session.user = user;
-              return request.session.save((err) => {
+
+              console.log(user);
+
+              if(user.role == "Administrador"){
+                return response.redirect("/home");
+              }else{
                 response.redirect("/");
-              });
+              }
             }
             response.render("index", { error: "Credenciales incorrectas" });
           })

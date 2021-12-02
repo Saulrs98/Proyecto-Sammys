@@ -88,7 +88,12 @@ module.exports = class Usuario {
   }
 
   static searchByUsuarioname(username) {
-    return db.execute("SELECT * FROM Usuario WHERE username = ?", [username]);
+    const query = `SELECT u.id, u.nombres, u.apellidos, u.email, u.direccion, u.telefono, u.username,
+    u.password, u.rol_id, r.role 
+    FROM Usuario u INNER JOIN Rol r ON r.id = u.rol_id 
+    WHERE username = ?`;
+    const params = [username];
+    return db.execute(query, params);
   }
 
   static encriptarPassword(password) {
