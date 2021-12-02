@@ -23,8 +23,6 @@ exports.add = (request, response, next) => {
 
   const carrito = new Carrito(0, producto_id, user.id, 1);
 
-  console.log(carrito);
-
   carrito
     .save()
     .then(() => {
@@ -46,6 +44,6 @@ exports.delete = (request, response, next) => {
     })
     .catch((err) => {
       console.log(err.sqlMessage);
-      response.redirect("/carrito/list");
+      response.redirect("/carrito");
     });
 };
