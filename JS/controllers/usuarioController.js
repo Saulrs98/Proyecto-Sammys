@@ -179,25 +179,23 @@ exports.login = (request, response, next) => {
               request.session.isLoggedIn = true;
               request.session.user = user;
 
-              console.log(user);
-
               if(user.role == "Administrador"){
                 return response.redirect("/home");
               }else{
-                response.redirect("/");
+                return response.redirect("/catalogo");
               }
             }
-            response.render("index", { error: "Credenciales incorrectas" });
+            response.render("login", { error: "Credenciales incorrectas" });
           })
           .catch((err) => {
-            response.render("index", { error: err });
+            response.render("login", { error: err });
           });
       } else {
-        response.render("index", { error: "Credenciales incorrectas" });
+        response.render("login", { error: "Credenciales incorrectas" });
       }
     })
     .catch((err) => {
-      response.render("index", { error: err.sqlMessage });
+      response.render("login", { error: err.sqlMessage });
     });
 };
 

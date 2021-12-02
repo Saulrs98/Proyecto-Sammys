@@ -29,7 +29,7 @@ module.exports = class Carrito {
   }
 
   static fetchAll(usuario_id) {
-    const query = `SELECT c.id, c.producto_id, c.usuario_id, c.cantidad, p.nombre, p.precio
+    const query = `SELECT c.id, c.producto_id, c.usuario_id, c.cantidad, p.nombre, p.precio, p.url
     FROM Carrito c
     INNER JOIN producto p ON p.id = c.producto_id
     WHERE usuario_id = ?`;

@@ -3,17 +3,19 @@ const Categoria = require("../models/categoria");
 
 exports.catalogo = (request, response, next) => {
   let filter = request.query.filter;
+  let message = request.query.message;
   const user = request.session.user;
+
   if (!filter) {
     filter = "";
   }
   Producto.fetchAll(filter)
     .then(([data, fieldData]) => {
-      console.log(data);
       response.render("modecliente/catalogo", {
         data: data,
         filter: filter,
         user: user,
+        message: message,
       });
     })
     .catch((err) => {
@@ -22,30 +24,7 @@ exports.catalogo = (request, response, next) => {
         data: [],
         filter: filter,
         user: user,
-      });
-    });
-};
-
-exports.index = (request, response, next) => {
-  let filter = request.query.filter;
-  const user = request.session.user;
-  if (!filter) {
-    filter = "";
-  }
-  Producto.fetchAll(filter)
-    .then(([data, fieldData]) => {
-      console.log(data);
-      response.render("index", {
-        data: data,
-        filter: filter,
-        user: user,
-      });
-    })
-    .catch((err) => {
-      response.render("index", {
-        data: [],
-        filter: filter,
-        user: user,
+        message: message,
       });
     });
 };

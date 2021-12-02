@@ -55,6 +55,14 @@
             </div>
 
             <div class="col-md-7">
+                <% if (message){ %>
+                    <br>
+                    <div class="alert alert-success alert-dismissable">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        <strong>¡Éxito!</strong> Producto <%=message%> al carrito de compras
+                    </div>
+                <%}%>
+
                 <% data.forEach(item =>{ %>
                     <div class="row">
                         <div class="col-md-4">
@@ -67,7 +75,7 @@
                                     <p class="card-text">$<%= item.precio %></p>
                                 </div>
                                 <div class="card-footer text-right">
-                                    <a href="/add-carrito?product_id=<%= item.id %>" class="btn btn-success"> Agregar al carrito</a>
+                                    <a href="/add-carrito?producto_id=<%= item.id %>" class="btn btn-success"> Agregar al carrito</a>
                                 </div>
                             </div>
                         </div>
@@ -77,8 +85,6 @@
         </div>
 
         <br>
-    </div>
-    
     </div>
     <%- include('../includes/footer-cliente.ejs') %>
 

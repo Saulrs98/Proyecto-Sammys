@@ -9,6 +9,7 @@ const categoriaController = require('../controllers/categoriaController');
 const productoController = require('../controllers/productoController');
 const cuentaController = require('../controllers/cuentaController');
 const clienteController = require('../controllers/clienteController');
+const carritoController = require('../controllers/carritoController');
 
 const router = Router();
 
@@ -16,9 +17,15 @@ router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({extended:true}));
 
 /* Cliente */
-router.get('', clienteController.index);
+router.get('', clienteController.catalogo);
 router.get('/catalogo', clienteController.catalogo);
 
+/* Carrito */
+router.get('/add-carrito', isAuth, carritoController.add);
+router.get('/carrito', isAuth, carritoController.list);
+router.get('/delete-carrito', isAuth, carritoController.delete);
+
+/*Home */
 router.get('/home', isAuth, homeController.home);
 
 /** Auth */
