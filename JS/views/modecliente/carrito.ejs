@@ -19,6 +19,13 @@
     <div class="container">
         <br>
         <h3>Carrito de compras</h3>
+        
+        <% if (success){ %>
+            <div class="alert alert-success alert-dismissable">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong>¡Éxito!</strong> Compra exitosa!!!
+            </div>
+        <%}%>
         <br>
         <div>
             <table class="table">
@@ -50,7 +57,8 @@
                 </tbody>
             </table>
             <% if(data.length > 0){ %>
-                <a href="/comprar" class="btn btn-primary">Realizar Compra</a>
+                <a href="/venta" class="btn btn-primary">Realizar Compra</a>
+                <br><br><br><br><br><br><br>
             <% } %>
         </div>
     </div>

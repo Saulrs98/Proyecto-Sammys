@@ -16,7 +16,7 @@
         <%- include('../includes/header-cliente-login.ejs') %>
     <%}%>
     
-    <div class="container-fluid body-cero">
+    <div class="container-fluid body-cero" style="margin-bottom: 130px;">
 
         <div class="d-flex">
             <div class="col-md-3 pl-lg-5">
@@ -38,9 +38,13 @@
                         <strong>¡Éxito!</strong> Producto <%=message%> al carrito de compras
                     </div>
                 <%}%>
-
-                <% data.forEach(item =>{ %>
+                <% 
+                    let cont = 0 
+                    data.forEach(item =>{ 
+                    if (cont % 3 == 0) { 
+                %>
                     <div class="row">
+                <% } %>
                         <div class="col-md-4">
                             <div class="card m-1">
                                 <div class="box-product">
@@ -55,8 +59,15 @@
                                 </div>
                             </div>
                         </div>
+                    
+                <% 
+                    cont += 1;
+                    if (cont % 3 == 0) {
+                %>
                     </div>
-                <% }) %>
+                <%
+                } }) 
+                %>
             </div>
         </div>
 

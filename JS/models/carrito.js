@@ -24,6 +24,10 @@ module.exports = class Carrito {
     return db.execute("DELETE FROM Carrito WHERE id = ?", [id]);
   }
 
+  static deleteByUsuario(id) {
+    return db.execute("DELETE FROM Carrito WHERE usuario_id = ?", [id]);
+  }
+
   static search(id) {
     return db.execute("SELECT * FROM Carrito WHERE id = ?", [id]);
   }

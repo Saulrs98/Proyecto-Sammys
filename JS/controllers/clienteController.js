@@ -1,5 +1,4 @@
 const Producto = require("../models/producto");
-const Categoria = require("../models/categoria");
 
 exports.catalogo = (request, response, next) => {
   let filter = request.query.filter;
@@ -29,14 +28,4 @@ exports.catalogo = (request, response, next) => {
     });
 };
 
-exports.logout = (request, response, next) => {
-  request.session.isLoggedIn = false;
-  request.session.user = null;
-  response.redirect("/");
-};
 
-exports.reset = (request, response, next) => {
-  request.session.destroy(() => {
-    response.redirect("/");
-  });
-};

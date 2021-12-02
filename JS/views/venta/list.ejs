@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+
+<body>
+    <%- include('../includes/header.ejs') %>
+        <div class="container">
+            <br>
+            <h3>Lista de Ventas</h3>
+            <% if (success){ %>
+                <div class="alert alert-success alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <strong>¡Éxito!</strong> Venta <%=success%> correctamente
+                </div>
+            <%}%>
+
+            <% if (error){ %>
+                <div class="alert alert-danger alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <strong>¡Error!</strong> No se puede eliminar el Venta
+                </div>
+            <%}%>
+
+            <form action="/venta/list" method="get">
+                <div class="form-row">
+                    <div class="col-md-12">
+                        <label class="control-label">Buscar por Venta</label>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-6">
+                        <input class="form-control" type="text" name="filter" value="<%= filter%>" />
+                    </div>
+                    <div class="col-md-2">
+                        <input type="submit" name="accion" value="Buscar" class="btn btn-danger" />
+                    </div>
+                </div>
+            </form>
+            <br>
+            <div>
+                <table class="table">
+                    <thead>
+                        <th>Codigo</th>
+                        <th>Cliente</th>
+                        <th>Fecha</th>
+                        <th>Total</th>
+                        <th>Estado</th>
+                        <th></th>
+                    </thead>
+                    <tbody>
+                        <% data.forEach(item=>{ %>
+                            <tr>
+                                <td><%= item.codigo %></td>
+                                <td><%= item.nombres %> <%= item.apellidos %></td>
+                                <td><%= item.fecha %></td>
+                                <td><%= item.total %></td>
+                                <td><%= item.estado %></td>
+                                <td class="text-right">
+                                    <div class="dropdown">
+                                        <button class="btn btn-primary dropdown-toggle" type="button"
+                                            id="dropdownMenuButton" data-toggle="dropdown"
+                                            aria-haspopup="true" aria-expanded="false">
+                                            Opciones
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item" href="/venta/aprobar?id=<%= item.id %>">Aprobar</a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <% }) %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <%- include('../includes/footer.ejs') %>
+
+
+</body>
+
+</html>

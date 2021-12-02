@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 02-12-2021 a las 07:20:21
+-- Tiempo de generación: 02-12-2021 a las 19:10:21
 -- Versión del servidor: 5.7.24
 -- Versión de PHP: 7.4.21
 
@@ -20,8 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `db_sammy`
 --
-CREATE DATABASE IF NOT EXISTS `db_sammy` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-USE `db_sammy`;
 
 -- --------------------------------------------------------
 
@@ -36,6 +34,13 @@ CREATE TABLE `carrito` (
   `cantidad` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Volcado de datos para la tabla `carrito`
+--
+
+INSERT INTO `carrito` (`id`, `producto_id`, `usuario_id`, `cantidad`) VALUES
+(2, 1, 2, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -46,6 +51,17 @@ CREATE TABLE `categoria` (
   `id` int(11) NOT NULL,
   `nombre` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `categoria`
+--
+
+INSERT INTO `categoria` (`id`, `nombre`) VALUES
+(4, 'Accesorios'),
+(3, 'Bolsas'),
+(5, 'Perfumes'),
+(1, 'Ropa'),
+(2, 'Zapatos');
 
 -- --------------------------------------------------------
 
@@ -103,6 +119,13 @@ CREATE TABLE `producto` (
   `categoria_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Volcado de datos para la tabla `producto`
+--
+
+INSERT INTO `producto` (`id`, `nombre`, `descripcion`, `precio`, `stock`, `genero`, `url`, `categoria_id`) VALUES
+(1, 'Gorro Balenciaga', 'Sin descripción', 100, 10, 'Hombre', '/uploads\\901-p1.png', 4);
+
 -- --------------------------------------------------------
 
 --
@@ -139,6 +162,14 @@ CREATE TABLE `usuario` (
   `password` varchar(1000) NOT NULL,
   `rol_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `usuario`
+--
+
+INSERT INTO `usuario` (`id`, `nombres`, `apellidos`, `email`, `direccion`, `telefono`, `username`, `password`, `rol_id`) VALUES
+(1, 'Default', 'Default', 'admin@gmail.com', 'Av Universitaria', '987312232', 'admin', '$2a$12$RM4mqZrGVhz8b7jiNFZU6OtbjqWlCOSdkRHpQcacd3I9JgctxfRQC', 1),
+(2, 'Anna', 'Gutierrez', 'anna@gmail.com', 'Unicreto #123', '987312232', 'anna', '$2a$12$dqre42dKc9SzhoMLGkZgZ.oJ9Aj4fj16gp0zp3NwHDUSbvd2UWvwS', 2);
 
 -- --------------------------------------------------------
 
@@ -233,13 +264,13 @@ ALTER TABLE `venta`
 -- AUTO_INCREMENT de la tabla `carrito`
 --
 ALTER TABLE `carrito`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `categoria`
 --
 ALTER TABLE `categoria`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `comprobante`
@@ -263,7 +294,7 @@ ALTER TABLE `detalle_venta`
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `rol`
@@ -275,7 +306,7 @@ ALTER TABLE `rol`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `venta`
