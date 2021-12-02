@@ -108,7 +108,6 @@ exports.update = (request, response, next) => {
   if(typeof request.file !== 'undefined'){
     url += request.file.path;
   }
-  console.log(url);
   const categoria_id = request.body.categoria_id;
 
   const producto = new Producto(

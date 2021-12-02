@@ -53,8 +53,13 @@
                     <label for="nombre">Género</label>
                     <select class="form-control" name="genero" id="genero">
                         <option value="">Seleccionar...</option>
-                        <option value="Hombre">Hombre</option>
-                        <option value="Mujer">Mujer</option>
+                        <% if(item.genero == "Hombre"){ %>
+                            <option value="Hombre" selected>Hombre</option>
+                            <option value="Mujer">Mujer</option>
+                        <%}else{%>
+                            <option value="Hombre">Hombre</option>
+                            <option value="Mujer" selected>Mujer</option>
+                        <%}%>                        
                     </select>
                 </div>
             </div>
@@ -80,7 +85,7 @@
             <div class="form-group">
                 <div class="col-md-6">
                     <label for="nombre">Imagen</label><br> 
-                    <img src="<%= item.url %>" alt="" height="350">                   
+                    <img src="<%= item.url %>" alt="" height="350">                 
                     <input class="form-control" type="file" name="imgproducto" id="imgproducto">
                 </div>
             </div>

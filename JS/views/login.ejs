@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>Sammy's Perfumes</title>
+	<link rel="stylesheet" type="text/css" href="css/login.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body style="background-image: url('img/back_login.png')">
+
+	<div class="containerLogin">
+		<form action="/login" method="post" class="formLogin" style="background-image: url('img/Recurso_206@33.33x.png')">
+			<% if (error !="" ) { %>
+				<div class="alert alert-danger alert-dismissable">
+					<button type="button" class="close" data-dismiss="alert">&times;</button>
+					<strong>¡Error!</strong>
+					<%= error %>
+				</div>
+			<% } %>
+			<div class="form-group">
+				<div class="row">
+					<div class="col col-lg-12 col-sm-12 col-md-12">
+						<input type="text" name="username" class="form-control" placeholder="Username">
+					</div>
+
+					<div class="col col-lg-12 col-sm-12 col-md-12 pt-3">
+						<input type="password" name="password" class="form-control" placeholder="password">
+					</div>
+					<br><br>
+
+					<div class="col col-lg-12 col-sm-12 col-md-12 pt-4">
+						<input id="btnIngresar" class="btn login_btn" type="submit" name="action" value="Ingresar">
+					</div>
+
+					<div class="col col-lg-12 col-sm-12 col-md-12 pt-4 text-center">
+						<a href="/register">Registrarse</a>
+					</div>
+					<br><br>
+					<br><br>
+
+					<div col col-lg-12 col-sm-12 col-md-12>
+						<img src="img/Recurso_200@33.33x.png" class="banner">
+					</div>
+
+					<div col col-lg-12 col-sm-12 col-md-12>
+						<img src="img/Recurso_201@33.33x.png" class="banner">
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+</body>
+
+</html>
