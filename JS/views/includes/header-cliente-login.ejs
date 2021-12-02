@@ -14,14 +14,14 @@
                 <a href="/catalogo"><img src="img/logo.png" alt=""></a>                
             </div>
             <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-                <form class="form-inline col-md-8">
+                <form action="/catalogo" method="get" class="form-inline col-md-8">
                     <div class="input-group menu-buscar" style="width: 100%;">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon1"><i class="fa fa-search"
                                     aria-hidden="true"></i></span>
                         </div>
                         <input type="text" class="form-control" placeholder="Buscar" aria-label="Buscar"
-                            aria-describedby="basic-addon1">
+                            aria-describedby="basic-addon1" name="filter" value="<%= filter %>">
                     </div>
                 </form>
                 <ul class="navbar-nav col-md-4">
@@ -41,11 +41,11 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav col-md-12 text-center">
-                    <a class="nav-item nav-link active menu-item" href="/catalogo?categoria=ropa">ROPA</a>
-                    <a class="nav-item nav-link menu-item" href="/catalogo?categoria=zapatos">ZAPATOS</a>
-                    <a class="nav-item nav-link menu-item" href="/catalogo?categoria=bolsas">BOLSAS</a>
-                    <a class="nav-item nav-link menu-item" href="/catalogo?categoria=accesorios">ACCESORIOS</a>
-                    <a class="nav-item nav-link menu-item" href="/catalogo?categoria=perfumes">PERFUMES</a>
+                    <a class="nav-item nav-link active menu-item" href="/catalogo?filter=ropa">ROPA</a>
+                    <a class="nav-item nav-link menu-item" href="/catalogo?filter=zapatos">ZAPATOS</a>
+                    <a class="nav-item nav-link menu-item" href="/catalogo?filter=bolsas">BOLSAS</a>
+                    <a class="nav-item nav-link menu-item" href="/catalogo?filter=accesorios">ACCESORIOS</a>
+                    <a class="nav-item nav-link menu-item" href="/catalogo?filter=perfumes">PERFUMES</a>
                 </div>
             </div>
         </nav>

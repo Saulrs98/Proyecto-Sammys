@@ -91,6 +91,8 @@ module.exports = class Producto {
       filter +
       `%' OR c.nombre LIKE '` +
       filter +
+      `%' OR p.genero LIKE '` +
+      filter +
       `%'`;
     return db.execute(query);
   }

@@ -21,20 +21,20 @@
                                     aria-hidden="true"></i></span>
                         </div>
                         <input type="text" class="form-control" placeholder="Buscar" aria-label="Buscar"
-                            aria-describedby="basic-addon1">
+                            aria-describedby="basic-addon1"  name="filter" value="<%= filter %>">
                     </div>
                 </form>
                 <ul class="navbar-nav col-md-4">
                     <li class="nav-item">
                         <a class="nav-link text-color-base" href="#"><i class="fa fa-user-circle"
-                                aria-hidden="true"></i><b> Username</b></span></a>
+                                aria-hidden="true"></i><b> <%= user.username %></b></span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-color-base" href="#"><i class="fa fa-shopping-cart"
                                 aria-hidden="true"></i></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link btn bg-color-base text-white" href="#" aria-hidden="true">CERRAR SESIÓN</a>
+                        <a class="nav-link btn bg-color-base text-white" href="/logout" aria-hidden="true">CERRAR SESIÓN</a>
                     </li>
                 </ul>
 

@@ -213,7 +213,7 @@ exports.saveRegister = (request, response, next) => {
   const telefono = request.body.telefono;
   const username = request.body.username;
   const password = request.body.password;
-  const rol_id = 1;
+  const rol_id = 2;
 
   Usuario.encriptarPassword(password)
     .then((hash) => {
