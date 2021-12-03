@@ -11,9 +11,15 @@
 
 <body>
     <%- include('../includes/header-cliente.ejs') %>
-        <div class="container">
+        <div class="container" style="margin-bottom: 130px;">
             <br>
             <h3>Mis Compras</h3>
+            <% if (message){ %>
+                <div class="alert alert-success alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <strong>¡Éxito!</strong> Se envió el comprobante correctamente
+                </div>
+            <%}%>
             <br>
             <div>
                 <table class="table">
@@ -33,7 +39,7 @@
                                 <td><%= item.estado %></td>
                                 <td class="text-right">
                                 <% if(item.estado == "Espera"){ %>
-                                    <a href="/pago" class="btn btn-primary">Enviar pago</a>
+                                    <a href="/pago?id=<%= item.id %>" class="btn btn-primary">Enviar pago</a>
                                 <%}%>
                                     <a href="/detalle-compra?id=<%= item.id %>" class="btn btn-success">Ver</a>
                                 </td>
@@ -43,7 +49,6 @@
                 </table>
             </div>
         </div>
-        <br><br><br><br><br><br><br>
         <%- include('../includes/footer-cliente.ejs') %>
 
 </body>

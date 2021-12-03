@@ -29,10 +29,12 @@ exports.list = (request, response, next) => {
 
 exports.misCompras = (request, response, next) => {
   const user = request.session.user;
+  let message = request.query.message;
   Venta.fetchAllByUsuario(user.id)
     .then(([data, fieldData]) => {
       response.render("modecliente/mis-compras", {
         data: data,
+        message: message,
       });
     })
     .catch((err) => {

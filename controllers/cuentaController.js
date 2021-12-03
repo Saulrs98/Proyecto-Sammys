@@ -21,6 +21,21 @@ exports.list = (request, response, next) => {
     });
 };
 
+exports.listByPago = (request, response, next) => {
+  const venta_id = request.query.id;
+  
+  Cuenta.fetchAll("")
+    .then(([data, fieldData]) => {
+      response.render("modecliente/pago", {
+        data: data,
+        venta_id: venta_id,
+      });
+    })
+    .catch((err) => {
+      response.redirect("/catalogo");
+    });
+};
+
 exports.add = (request, response, next) => {
   response.render("cuenta/add", { error: null });
 };
