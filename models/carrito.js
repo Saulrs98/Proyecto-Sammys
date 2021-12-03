@@ -41,7 +41,7 @@ module.exports = class Carrito {
   static searchByProducto(producto_id) {
     const query = `SELECT c.id, c.producto_id, c.usuario_id, c.cantidad, p.nombre, p.precio, p.url, p.stock
     FROM Carrito c
-    INNER JOIN producto p ON p.id = c.producto_id
+    INNER JOIN producto p ON p.id = c.producto_id 
     WHERE producto_id = ?`;
     const params = [producto_id];
     return db.execute(query, params);
