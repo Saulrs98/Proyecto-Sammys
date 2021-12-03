@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+</head>
+<body>
+    <%- include('../includes/header-cliente.ejs') %>
+    <div class="container" style="margin-bottom: 130px;">
+        <br>
+        <h3>Lista de Cuentas</h3>
+        <br>
+        <div>
+            <table class="table">
+                <thead>
+                    <th>Número cuenta</th>
+                    <th>Nombre titular</th>
+                </thead>
+                <tbody>
+                    <% data.forEach(item =>{ %>
+                    <tr>
+                        <td><%= item.numero_cuenta %></td>
+                        <td><%= item.nombre_titular %></td>
+                    </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+        <br>
+        <form action="/pago" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <div class="col-md-6">
+                    <input class="form-control" type="number" name="venta_id" value="<%= venta_id %>" hidden>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-6">
+                    <label for="nombre">Comrpobante de pago</label>
+                    <input class="form-control" type="file" name="imgproducto" id="imgproducto" required>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <input class="btn btn-primary" type="submit" value="Enviar">
+                <a href="/mis-compras" class="btn btn-danger"> Cancelar</a>
+            </div>
+        </form>
+    </div>
+    <%- include('../includes/footer-cliente.ejs') %>
+
+    
+</body>
+</html>

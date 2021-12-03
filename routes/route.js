@@ -12,6 +12,7 @@ const clienteController = require('../controllers/clienteController');
 const carritoController = require('../controllers/carritoController');
 const ventaController = require('../controllers/ventaController');
 const direccionController = require('../controllers/direccionController');
+const comprobanteController = require('../controllers/comprobanteController');
 
 const router = Router();
 
@@ -73,6 +74,7 @@ router.post('/producto/save', isAuth, productoController.save);
 router.post('/producto/update', isAuth, productoController.update);
 
 /* Cuenta */
+router.get('/pago', isAuth, cuentaController.listByPago);
 router.get('/cuenta/list', isAuth, cuentaController.list);
 router.get('/cuenta/add', isAuth, cuentaController.add);
 router.get('/cuenta/edit', isAuth, cuentaController.edit);
@@ -92,6 +94,9 @@ router.get('/direccion-list', isAuth, direccionController.list);
 router.get('/direccion-add', isAuth, direccionController.add);
 router.get('/direccion-delete', isAuth, direccionController.delete);
 router.post('/direccion-save', isAuth, direccionController.save);
+
+/* Comprobante */
+router.post('/pago', isAuth, comprobanteController.pago);
 
 router.use(homeController.error404);
 
