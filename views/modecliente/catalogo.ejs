@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Document</title>
+</head>
+
+<body>
+    <% if (user){%>
+        <%- include('../includes/header-cliente.ejs') %>          
+    <%}else{%>
+        <%- include('../includes/header-cliente-login.ejs') %>
+    <%}%>
+    
+    <div class="container-fluid body-cero" style="margin-bottom: 130px;">
+
+        <div class="d-flex">
+            <div class="col-md-3 pl-lg-5">
+                <div class="row pt-lg-5 pb-lg-5">
+                    <div class="btn btn-genero-active col-md-5 ml-1">
+                        <a href="/catalogo?filter=mujer">MUJER</a>
+                    </div>
+                    <div class="btn btn-genero col-md-5 ml-1">
+                        <a href="/catalogo?filter=hombre">HOMBRE</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-7">
+                <% if (message){ %>
+                    <br>
+                    <% if (message != "false"){ %>
+                        <div class="alert alert-success alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                            <strong>¡Éxito!</strong> Producto <%=message%> al carrito de compras
+                        </div>
+                    <%}else{%>
+                        <div class="alert alert-danger alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                            <strong>¡Ops!</strong> No hay stock sufiente del producto
+                        </div>
+                    <%}%>
+                <%}%>
+                <% 
+                    let cont = 0 
+                    data.forEach(item =>{ 
+                    if (cont % 3 == 0) { 
+                %>
+                    <div class="row">
+                <% } %>
+                        <div class="col-md-4">
+                            <div class="card m-1">
+                                <div class="box-product">
+                                    <img class="card-img-top img-product" src="<%= item.url %>" alt="Card image">
+                                </div>
+                                <div class="card-body">
+                                    <h4 class="card-title">
+                                        <%= item.nombre %>
+                                    </h4>  
+                                    <p class="card-text">
+                                        <b>Precio: </b>$<%= item.precio %><br>
+                                        <b>Stock: </b><%= item.stock %><br>
+                                    </p> 
+                                </div>
+                                <div class="card-body" style="height: 100px;">
+                                    <p class="card-text">
+                                        <%= item.descripcion %>
+                                    </p>
+                                </div>
+                                <div class="card-footer text-right">
+                                    <a href="/add-carrito?producto_id=<%= item.id %>" class="btn btn-success"> Agregar al carrito</a>                                    
+                                </div>
+                            </div>
+                        </div>
+                    
+                <% 
+                    cont += 1;
+                    if (cont % 3 == 0) {
+                %>
+                    </div>
+                <%
+                } }) 
+                %>
+            </div>
+        </div>
+
+        <br>
+    </div>
+    <%- include('../includes/footer-cliente.ejs') %>
+
+</body>
+
+</html>

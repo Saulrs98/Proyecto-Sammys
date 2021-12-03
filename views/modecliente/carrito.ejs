@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Document</title>
+</head>
+
+<body>
+    <% if (user){%>
+        <%- include('../includes/header-cliente.ejs') %>          
+    <%}else{%>
+        <%- include('../includes/header-cliente-login.ejs') %>
+    <%}%>
+    
+    <div class="container">
+        <br>
+        <h3>Carrito de compras</h3>
+        
+        <% if (success){ %>
+            <div class="alert alert-success alert-dismissable">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong>¡Éxito!</strong> Compra exitosa!!!
+            </div>
+        <%}%>
+        <br>
+        <div>
+            <a href="/direccion-list">Mis direcciones</a>
+        </div>
+        <br>
+        <div>
+            <table class="table">
+                <thead>
+                    <th>Producto</th>
+                    <th>Precio</th>
+                    <th>Cantidad</th>
+                    <th>Imagen</th>                    
+                    <th></th>
+                </thead>
+                <tbody>
+                    <% let total = 0; %>
+                    <% data.forEach(item =>{ %>
+                        <% total += item.precio * item.cantidad; %>
+                    <tr>
+                        <td><%= item.nombre %></td>
+                        <td>$<%= item.precio %></td>
+                        <td><%= item.cantidad %></td>
+                        <td><img src="<%= item.url %>" alt="" width="100"></td>
+                        <td class="text-right">
+                            <a href="/delete-carrito?id=<%= item.id %>" class="btn btn-danger">Eliminar</a>
+                        </td>
+                    </tr>
+                    <% }) %>
+                    <tr>
+                        <td><b>Total</b></td>
+                        <td><b>$<%= total %></b></td>
+                    </tr>
+                </tbody>
+            </table>
+            <% if(data.length > 0){ %>
+
+                <form action="/venta" method="post">
+                    <div class="form-group">
+                        <div class="col-md-6">
+                            <label for="direccion_id">Dirección de envío</label>
+                            <select class="form-control" name="direccion_id" required>
+                                <option value="">Seleccionar dirección</option>
+                                <% direcciones.forEach(item =>{ %>
+                                    <option value="<%= item.id%>">
+                                        <%= item.direccion_postal %>, <%= item.ciudad %>, <%= item.provincia %>, <%= item.codigo_postal %>
+                                    </option>
+                                <%})%>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <input class="btn btn-primary" type="submit" value="Realizar Compra">
+                    </div>
+                </form>
+                <br><br><br><br><br><br><br>
+            <% } %>
+        </div>
+    </div>
+
+    <%- include('../includes/footer-cliente.ejs') %>
+
+</body>
+
+</html>

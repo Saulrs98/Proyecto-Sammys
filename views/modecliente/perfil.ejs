@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <%- include('../includes/header.ejs') %>
+        <div class="container">
+            <br>
+            <h3>Editar Usuario</h3>
+            <% if (error){ %>
+                <div class="alert alert-danger alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <strong>¡Error!</strong> <%=error%>
+                </div>
+            <%}%>
+            <form action="/usuario/update" method="post">
+                <div class="form-group">
+                    <div class="col-md-6">
+                        <input class="form-control" type="text" name="id" value="<%= item.id%>" hidden>
+                    </div>
+                </div>
+                <div class="div-right">
+                    <h3 class="name-form">CREAR CUENTA</h3>
+                    <form action="/register" method="post">
+                        <div class="row text-box-form">
+                            <div class="col-md-4">
+                                <label>Nombres(s)</label>
+                            </div>
+                            <div class="col-md-8">
+                                <input class="form-control" type="text" name="nombres" required />
+                            </div>
+                        </div>
+                        <div class="row text-box-form">
+                            <div class="col-md-4">
+                                <label>Apellido(s)</label>
+                            </div>
+                            <div class="col-md-8">
+                                <input class="form-control" type="text" name="apellidos" required />
+                            </div>
+                        </div>
+                        <div class="row text-box-form">
+                            <div class="col-md-4">
+                                <label>Correo</label>
+                            </div>
+                            <div class="col-md-8">
+                                <input class="form-control" type="email" name="email" required />
+                            </div>
+                        </div>
+                        <div class="row text-box-form">
+                            <div class="col-md-4">
+                                <label>Dirección de residencia</label>
+                            </div>
+                            <div class="col-md-8">
+                                <input class="form-control" type="text" name="direccion" required />
+                            </div>
+                        </div>
+                        <div class="row text-box-form">
+                            <div class="col-md-4">
+                                <label>Teléfono</label>
+                            </div>
+                            <div class="col-md-8">
+                                <input class="form-control" type="text" name="telefono" required />
+                            </div>
+                        </div>
+                        <div class="row text-box-form">
+                            <div class="col-md-4">
+                                <label>Usuario</label>
+                            </div>
+                            <div class="col-md-8">
+                                <input class="form-control" type="text" name="username" required />
+                            </div>
+                        </div>
+                        <div class="row text-box-form">
+                            <div class="col-md-4">
+                                <label>Contraseña</label>
+                            </div>
+                            <div class="col-md-8">
+                                <input class="form-control" type="password" name="password"/>
+                            </div>
+                        </div>
+                        <div class="row btn-form">
+                            <input class="btn btn-dark" type="submit" value="Actualizar Información" /> |  
+                            <a href="/" class="btn btn-danger"> Cancelar</a>                                            
+                        </div>
+                    </form>
+                </div>
+            </form>
+        </div>
+        <%- include('../includes/footer.ejs') %>
+</body>
+
+</html>
