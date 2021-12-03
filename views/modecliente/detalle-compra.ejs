@@ -74,6 +74,16 @@
             </table>
             
         </div>
+        <h3>Comprobantes de pago</h3>
+        <br>
+        <div>
+            <% comprobantes.forEach(element =>{ %>
+            <div>
+                <img src="<%= element.url %>" alt="" width="200">
+            </div>
+            <% }) %>
+            
+        </div>
     </div>
     <%- include('../includes/footer-cliente.ejs') %>
 

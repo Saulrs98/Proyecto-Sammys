@@ -1,5 +1,6 @@
 const Venta = require("../models/venta");
 const DetalleVenta = require("../models/detalleVenta");
+const Comprobante = require("../models/comprobante");
 
 exports.list = (request, response, next) => {
   let filter = request.query.filter;
@@ -62,11 +63,18 @@ exports.view = (request, response, next) => {
     .then(([data, fieldData]) => {
       DetalleVenta.fetchAll(data[0].id)
         .then(([detalle, fieldData]) => {
-          response.render("venta/view", {
-            item: data[0],
-            detalle: detalle,
-            error: null,
-          });
+          Comprobante.fetchAll(data[0].id)
+            .then(([comprobantes, fieldData]) => {
+              response.render("venta/view", {
+                item: data[0],
+                detalle: detalle,
+                comprobantes: comprobantes,
+                error: null,
+              });
+            })
+            .catch((err) => {
+              response.redirect("/venta/list");
+            });
         })
         .catch((err) => {
           response.redirect("/venta/list");
@@ -83,11 +91,18 @@ exports.detalleCompra = (request, response, next) => {
     .then(([data, fieldData]) => {
       DetalleVenta.fetchAll(data[0].id)
         .then(([detalle, fieldData]) => {
-          response.render("modecliente/detalle-compra", {
-            item: data[0],
-            detalle: detalle,
-            error: null,
-          });
+          Comprobante.fetchAll(data[0].id)
+            .then(([comprobantes, fieldData]) => {
+              response.render("modecliente/detalle-compra", {
+                item: data[0],
+                detalle: detalle,
+                comprobantes: comprobantes,
+                error: null,
+              });
+            })
+            .catch((err) => {
+              response.redirect("/venta/list");
+            });
         })
         .catch((err) => {
           response.redirect("/catalogo");
