@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Document</title>
+</head>
+
+<body>
+    <%- include('../includes/header.ejs') %>
+    <div class="container">
+        <br>
+        <h3>Información de venta</h3>
+        <br>
+        <div class="form-row">
+            <div class="col-md-2">
+                <label><b>Código</b></label>
+            </div>
+            <%= item.codigo%>
+        </div>
+        <div class="form-row">
+            <div class="col-md-2">
+                <label><b>Fecha</b></label>
+            </div>
+            <%= item.fecha%>
+        </div>
+        <div class="form-row">
+            <div class="col-md-2">
+                <label><b>Estado</b></label>
+            </div>
+            <%= item.estado%>
+        </div>
+        <div class="form-row">
+            <div class="col-md-2">
+                <label><b>Cliente</b></label>
+            </div>
+            <%= item.nombres%> <%= item.apellidos%>
+        </div>
+        <div class="form-row">
+            <div class="col-md-2">
+                <label><b>Dirección de envío</b></label>
+            </div>
+            <%= item.direccion_postal%>, <%= item.ciudad%>, <%= item.provincia%>, <%= item.codigo_postal%>
+        </div>
+        <br>
+
+        <h3>Detalle de venta</h3>
+        <br>
+        <div>
+            <table class="table">
+                <thead>
+                    <th>Producto</th>
+                    <th>Precio</th>
+                    <th>Cantidad</th>
+                    <th>Imagen</th>                    
+                    <th></th>
+                </thead>
+                <tbody>
+                    <% let total = 0; %>
+                    <% detalle.forEach(element =>{ %>
+                        <% total += element.precio * element.cantidad; %>
+                    <tr>
+                        <td><%= element.nombre %></td>
+                        <td>$<%= element.precio %></td>
+                        <td><%= element.cantidad %></td>
+                        <td><img src="<%= element.url %>" alt="" width="100"></td>
+                        <td class="text-right">
+                            <a href="/delete-carrito?id=<%= element.id %>" class="btn btn-danger">Eliminar</a>
+                        </td>
+                    </tr>
+                    <% }) %>
+                    <tr>
+                        <td><b>Total</b></td>
+                        <td><b>$<%= total %></b></td>
+                    </tr>
+                </tbody>
+            </table>
+            
+        </div>
+    </div>
+
+    <%- include('../includes/footer.ejs') %>
+
+</body>
+
+</html>

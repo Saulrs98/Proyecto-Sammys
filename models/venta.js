@@ -23,7 +23,7 @@ module.exports = class Venta {
   }
 
   static search(id) {
-    const query = `SELECT v.id, v.codigo, date_format(v.fecha, '%Y-%M-%d') as fecha, v.total, v.estado, 
+    const query = `SELECT v.id, v.codigo, date_format(v.fecha, '%Y-%m-%d') as fecha, v.total, v.estado, 
     v.usuario_id, u.nombres, u.apellidos, v.direccion_id, d.direccion_postal, d.ciudad, d.provincia, d.codigo_postal
     FROM Venta v
     INNER JOIN Usuario u ON u.id = v.usuario_id
@@ -51,7 +51,7 @@ module.exports = class Venta {
   }
 
   static fetchAllByUsuario(usuario_id) {
-    const query = `SELECT v.id, v.codigo, date_format(v.fecha, '%Y-%M-%d') as fecha, v.total, v.estado, 
+    const query = `SELECT v.id, v.codigo, date_format(v.fecha, '%Y-%m-%d') as fecha, v.total, v.estado, 
     v.usuario_id, u.nombres, u.apellidos, v.direccion_id, d.direccion_postal, d.ciudad, d.provincia, d.codigo_postal
     FROM Venta v
     INNER JOIN Usuario u ON u.id = v.usuario_id
@@ -63,7 +63,7 @@ module.exports = class Venta {
   }
 
   static fetchAll(filter) {
-    const query = `SELECT v.id, v.codigo, date_format(v.fecha, '%Y-%M-%d') as fecha, v.total, v.estado, 
+    const query = `SELECT v.id, v.codigo, date_format(v.fecha, '%Y-%m-%d') as fecha, v.total, v.estado, 
     v.usuario_id, u.nombres, u.apellidos, v.direccion_id, d.direccion_postal, d.ciudad, d.provincia, d.codigo_postal
     FROM Venta v
     INNER JOIN Usuario u ON u.id = v.usuario_id

@@ -1,4 +1,5 @@
 const Venta = require("../models/venta");
+const DetalleVenta = require("../models/detalleVenta");
 
 exports.list = (request, response, next) => {
   let filter = request.query.filter;
@@ -26,7 +27,6 @@ exports.list = (request, response, next) => {
     });
 };
 
-
 exports.aprobar = (request, response, next) => {
   const id = request.query.id;
   Venta.aprobar(id)
@@ -38,5 +38,26 @@ exports.aprobar = (request, response, next) => {
     .catch((err) => {
       console.log(err.sqlMessage);
       response.redirect("/venta/list?error=true");
+    });
+};
+
+exports.view = (request, response, next) => {
+  const id = request.query.id;
+  Venta.search(id)
+    .then(([data, fieldData]) => {
+      DetalleVenta.fetchAll(data[0].id)
+        .then(([detalle, fieldData]) => {
+          response.render("venta/view", {
+            item: data[0],
+            detalle: detalle,
+            error: null,
+          });
+        })
+        .catch((err) => {
+          response.redirect("/venta/list");
+        });
+    })
+    .catch((err) => {
+      response.redirect("/venta/list");
     });
 };

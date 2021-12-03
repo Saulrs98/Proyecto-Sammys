@@ -30,10 +30,10 @@ module.exports = class DetalleVenta {
   }
 
   static fetchAll(venta_id) {
-    const query = `SELECT d.id, d.producto_id, d.venta_id, d.cantidad, d.precio, d.subtotal, v.codigo, p.nombre
-    Producto p ON p.id = d.producto_id
-    Venta v ON v.id = d.venta_id 
-    FROM Detalle_Venta v 
+    const query = `SELECT d.id, d.producto_id, d.venta_id, d.cantidad, d.precio, d.subtotal, v.codigo, p.nombre, p.url
+    FROM Detalle_Venta d
+    INNER JOIN Producto p ON p.id = d.producto_id
+    INNER JOIN Venta v ON v.id = d.venta_id      
     WHERE d.venta_id = ?`;
     const params = [venta_id];
     return db.execute(query, params);

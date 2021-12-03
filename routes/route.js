@@ -82,6 +82,7 @@ router.post('/cuenta/update', isAuth, cuentaController.update);
 /* Venta */
 router.get('/venta/list', isAuth, ventaController.list);
 router.get('/venta/aprobar', isAuth, ventaController.aprobar);
+router.get('/venta/view', isAuth, ventaController.view);
 
 /* Direccion */
 router.get('/direccion-list', isAuth, direccionController.list);
