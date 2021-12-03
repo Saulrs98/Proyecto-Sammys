@@ -9,90 +9,47 @@
 </head>
 
 <body>
-    <%- include('../includes/header.ejs') %>
+    <%- include('../includes/header-cliente.ejs') %>
         <div class="container">
             <br>
-            <h3>Editar Usuario</h3>
-            <% if (error){ %>
-                <div class="alert alert-danger alert-dismissable">
-                    <button type="button" class="close" data-dismiss="alert">&times;</button>
-                    <strong>¡Error!</strong> <%=error%>
+
+            <div class="form-row">
+                <div class="col-md-2">
+                    <label><b>Nombres</b></label>
                 </div>
-            <%}%>
-            <form action="/usuario/update" method="post">
-                <div class="form-group">
-                    <div class="col-md-6">
-                        <input class="form-control" type="text" name="id" value="<%= item.id%>" hidden>
-                    </div>
+                <%= item.nombres%>
+            </div>
+            <div class="form-row">
+                <div class="col-md-2">
+                    <label><b>Apellidos</b></label>
                 </div>
-                <div class="div-right">
-                    <h3 class="name-form">CREAR CUENTA</h3>
-                    <form action="/register" method="post">
-                        <div class="row text-box-form">
-                            <div class="col-md-4">
-                                <label>Nombres(s)</label>
-                            </div>
-                            <div class="col-md-8">
-                                <input class="form-control" type="text" name="nombres" required />
-                            </div>
-                        </div>
-                        <div class="row text-box-form">
-                            <div class="col-md-4">
-                                <label>Apellido(s)</label>
-                            </div>
-                            <div class="col-md-8">
-                                <input class="form-control" type="text" name="apellidos" required />
-                            </div>
-                        </div>
-                        <div class="row text-box-form">
-                            <div class="col-md-4">
-                                <label>Correo</label>
-                            </div>
-                            <div class="col-md-8">
-                                <input class="form-control" type="email" name="email" required />
-                            </div>
-                        </div>
-                        <div class="row text-box-form">
-                            <div class="col-md-4">
-                                <label>Dirección de residencia</label>
-                            </div>
-                            <div class="col-md-8">
-                                <input class="form-control" type="text" name="direccion" required />
-                            </div>
-                        </div>
-                        <div class="row text-box-form">
-                            <div class="col-md-4">
-                                <label>Teléfono</label>
-                            </div>
-                            <div class="col-md-8">
-                                <input class="form-control" type="text" name="telefono" required />
-                            </div>
-                        </div>
-                        <div class="row text-box-form">
-                            <div class="col-md-4">
-                                <label>Usuario</label>
-                            </div>
-                            <div class="col-md-8">
-                                <input class="form-control" type="text" name="username" required />
-                            </div>
-                        </div>
-                        <div class="row text-box-form">
-                            <div class="col-md-4">
-                                <label>Contraseña</label>
-                            </div>
-                            <div class="col-md-8">
-                                <input class="form-control" type="password" name="password"/>
-                            </div>
-                        </div>
-                        <div class="row btn-form">
-                            <input class="btn btn-dark" type="submit" value="Actualizar Información" /> |  
-                            <a href="/" class="btn btn-danger"> Cancelar</a>                                            
-                        </div>
-                    </form>
+                <%= item.apellidos%>
+            </div>
+            <div class="form-row">
+                <div class="col-md-2">
+                    <label><b>Email</b></label>
                 </div>
-            </form>
+                <%= item.email%>
+            </div>
+            <div class="form-row">
+                <div class="col-md-2">
+                    <label><b>Direccion</b></label>
+                </div>
+                <%= item.direccion%>
+            </div>
+            <div class="form-row">
+                <div class="col-md-2">
+                    <label><b>Teléfono</b></label>
+                </div>
+                <%= item.telefono%>
+            </div>
+            
+            <div class="form-group">
+                <a href="/direccion-list" class="btn btn-success" > Mis Direcciones</a>    
+                <a href="/mis-compras" class="btn btn-primary" > Mis Compras</a>                                          
+            </div>
         </div>
-        <%- include('../includes/footer.ejs') %>
+        <%- include('../includes/footer-cliente.ejs') %>
 </body>
 
 </html>

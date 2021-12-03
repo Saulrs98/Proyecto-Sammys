@@ -10,10 +10,10 @@
 </head>
 
 <body>
-    <%- include('../includes/header.ejs') %>
+    <%- include('../includes/header-cliente.ejs') %>
     <div class="container">
         <br>
-        <h3>Información de venta</h3>
+        <h3>Información de compra</h3>
         <br>
         <div class="form-row">
             <div class="col-md-2">
@@ -35,19 +35,16 @@
         </div>
         <div class="form-row">
             <div class="col-md-2">
-                <label><b>Cliente</b></label>
-            </div>
-            <%= item.nombres%> <%= item.apellidos%>
-        </div>
-        <div class="form-row">
-            <div class="col-md-2">
                 <label><b>Dirección de envío</b></label>
             </div>
             <%= item.direccion_postal%>, <%= item.ciudad%>, <%= item.provincia%>, <%= item.codigo_postal%>
         </div>
+        
+        <div class="form-row">
+            <a href="/mis-compras" class="btn btn-primary" > Volver</a> 
+        </div>        
         <br>
-
-        <h3>Detalle de venta</h3>
+        <h3>Detalle de compra</h3>
         <br>
         <div>
             <table class="table">
@@ -55,7 +52,8 @@
                     <th>Producto</th>
                     <th>Precio</th>
                     <th>Cantidad</th>
-                    <th>Imagen</th>  
+                    <th>Imagen</th>                    
+                    <th></th>
                 </thead>
                 <tbody>
                     <% let total = 0; %>
@@ -77,8 +75,8 @@
             
         </div>
     </div>
-
-    <%- include('../includes/footer.ejs') %>
+    <br><br><br><br><br><br><br>
+    <%- include('../includes/footer-cliente.ejs') %>
 
 </body>
 

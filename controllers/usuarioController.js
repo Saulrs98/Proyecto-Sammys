@@ -71,12 +71,12 @@ exports.save = (request, response, next) => {
               });
             })
             .catch((err) => {
-              response.redirect("usuario/list");
+              response.redirect("/usuario/list");
             });
         });
     })
     .catch((err) => {
-      response.redirect("usuario/list");
+      response.redirect("/usuario/list");
     });
 };
 
@@ -93,11 +93,24 @@ exports.edit = (request, response, next) => {
           });
         })
         .catch((err) => {
-          response.redirect("usuario/list");
+          response.redirect("/usuario/list");
         });
     })
     .catch((err) => {
-      response.redirect("usuario/list");
+      response.redirect("/usuario/list");
+    });
+};
+
+exports.perfil = (request, response, next) => {
+  const user = request.session.user;
+  Usuario.search(user.id)
+    .then(([data, fieldData]) => {
+      response.render("modecliente/perfil", {
+        item: data[0],
+      });
+    })
+    .catch((err) => {
+      response.redirect("/catalogo");
     });
 };
 
@@ -141,7 +154,7 @@ exports.update = (request, response, next) => {
               });
             })
             .catch((err) => {
-              response.redirect("usuario/list");
+              response.redirect("/usuario/list");
             });
         });
     })

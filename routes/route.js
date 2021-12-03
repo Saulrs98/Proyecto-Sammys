@@ -46,6 +46,7 @@ router.post('/usuario/save', usuarioController.save);
 router.post('/usuario/update', usuarioController.update);
 router.get('/usuario/list', isAuth, usuarioController.list);
 router.get('/usuario/delete', isAuth, usuarioController.delete);
+router.get('/perfil', isAuth, usuarioController.perfil);
 
 /* Rol */
 router.get('/rol/list', isAuth, rolController.list);
@@ -83,6 +84,8 @@ router.post('/cuenta/update', isAuth, cuentaController.update);
 router.get('/venta/list', isAuth, ventaController.list);
 router.get('/venta/aprobar', isAuth, ventaController.aprobar);
 router.get('/venta/view', isAuth, ventaController.view);
+router.get('/mis-compras', isAuth, ventaController.misCompras);
+router.get('/detalle-compra', isAuth, ventaController.detalleCompra);
 
 /* Direccion */
 router.get('/direccion-list', isAuth, direccionController.list);

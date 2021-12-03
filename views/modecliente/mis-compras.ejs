@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+
+<body>
+    <%- include('../includes/header-cliente.ejs') %>
+        <div class="container">
+            <br>
+            <h3>Mis Compras</h3>
+            <br>
+            <div>
+                <table class="table">
+                    <thead>
+                        <th>Codigo</th>
+                        <th>Fecha</th>
+                        <th>Total</th>
+                        <th>Estado</th>
+                        <th></th>
+                    </thead>
+                    <tbody>
+                        <% data.forEach(item=>{ %>
+                            <tr>
+                                <td><%= item.codigo %></td>
+                                <td><%= item.fecha %></td>
+                                <td><%= item.total %></td>
+                                <td><%= item.estado %></td>
+                                <td class="text-right">
+                                <% if(item.estado == "Espera"){ %>
+                                    <a href="/pago" class="btn btn-primary">Enviar pago</a>
+                                <%}%>
+                                    <a href="/detalle-compra?id=<%= item.id %>" class="btn btn-success">Ver</a>
+                                </td>
+                            </tr>
+                            <% }) %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <br><br><br><br><br><br><br>
+        <%- include('../includes/footer-cliente.ejs') %>
+
+</body>
+
+</html>

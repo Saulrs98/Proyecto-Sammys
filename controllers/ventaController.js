@@ -27,6 +27,19 @@ exports.list = (request, response, next) => {
     });
 };
 
+exports.misCompras = (request, response, next) => {
+  const user = request.session.user;
+  Venta.fetchAllByUsuario(user.id)
+    .then(([data, fieldData]) => {
+      response.render("modecliente/mis-compras", {
+        data: data,
+      });
+    })
+    .catch((err) => {
+      response.redirect("/catalogo");
+    });
+};
+
 exports.aprobar = (request, response, next) => {
   const id = request.query.id;
   Venta.aprobar(id)
@@ -59,5 +72,26 @@ exports.view = (request, response, next) => {
     })
     .catch((err) => {
       response.redirect("/venta/list");
+    });
+};
+
+exports.detalleCompra = (request, response, next) => {
+  const id = request.query.id;
+  Venta.search(id)
+    .then(([data, fieldData]) => {
+      DetalleVenta.fetchAll(data[0].id)
+        .then(([detalle, fieldData]) => {
+          response.render("modecliente/detalle-compra", {
+            item: data[0],
+            detalle: detalle,
+            error: null,
+          });
+        })
+        .catch((err) => {
+          response.redirect("/catalogo");
+        });
+    })
+    .catch((err) => {
+      response.redirect("/catalogo");
     });
 };
