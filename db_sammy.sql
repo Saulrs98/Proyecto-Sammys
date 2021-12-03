@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 02-12-2021 a las 19:10:21
+-- Tiempo de generación: 03-12-2021 a las 20:29:12
 -- Versión del servidor: 5.7.24
 -- Versión de PHP: 7.4.21
 
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `db_sammy`
 --
+CREATE DATABASE IF NOT EXISTS `db_sammy` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `db_sammy`;
 
 -- --------------------------------------------------------
 
@@ -33,13 +35,6 @@ CREATE TABLE `carrito` (
   `usuario_id` int(11) NOT NULL,
   `cantidad` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Volcado de datos para la tabla `carrito`
---
-
-INSERT INTO `carrito` (`id`, `producto_id`, `usuario_id`, `cantidad`) VALUES
-(2, 1, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -105,6 +100,21 @@ CREATE TABLE `detalle_venta` (
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `direccion`
+--
+
+CREATE TABLE `direccion` (
+  `id` int(11) NOT NULL,
+  `direccion_postal` varchar(100) NOT NULL,
+  `ciudad` varchar(45) NOT NULL,
+  `provincia` varchar(45) NOT NULL,
+  `codigo_postal` varchar(45) NOT NULL,
+  `usuario_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `producto`
 --
 
@@ -118,13 +128,6 @@ CREATE TABLE `producto` (
   `url` varchar(200) DEFAULT NULL,
   `categoria_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Volcado de datos para la tabla `producto`
---
-
-INSERT INTO `producto` (`id`, `nombre`, `descripcion`, `precio`, `stock`, `genero`, `url`, `categoria_id`) VALUES
-(1, 'Gorro Balenciaga', 'Sin descripción', 100, 10, 'Hombre', '/uploads\\901-p1.png', 4);
 
 -- --------------------------------------------------------
 
@@ -183,7 +186,8 @@ CREATE TABLE `venta` (
   `fecha` date NOT NULL,
   `total` double NOT NULL,
   `estado` varchar(45) NOT NULL,
-  `usuario_id` int(11) NOT NULL
+  `usuario_id` int(11) NOT NULL,
+  `direccion_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -227,6 +231,13 @@ ALTER TABLE `detalle_venta`
   ADD KEY `fk_detalle_venta_producto1_idx` (`producto_id`);
 
 --
+-- Indices de la tabla `direccion`
+--
+ALTER TABLE `direccion`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_direccion_usuario1_idx` (`usuario_id`);
+
+--
 -- Indices de la tabla `producto`
 --
 ALTER TABLE `producto`
@@ -254,7 +265,8 @@ ALTER TABLE `usuario`
 ALTER TABLE `venta`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `codigo_UNIQUE` (`codigo`),
-  ADD KEY `fk_venta_usuario1_idx` (`usuario_id`);
+  ADD KEY `fk_venta_usuario1_idx` (`usuario_id`),
+  ADD KEY `fk_venta_direccion1_idx` (`direccion_id`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -264,7 +276,7 @@ ALTER TABLE `venta`
 -- AUTO_INCREMENT de la tabla `carrito`
 --
 ALTER TABLE `carrito`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `categoria`
@@ -291,10 +303,16 @@ ALTER TABLE `detalle_venta`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT de la tabla `direccion`
+--
+ALTER TABLE `direccion`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `rol`
@@ -339,6 +357,12 @@ ALTER TABLE `detalle_venta`
   ADD CONSTRAINT `fk_detalle_venta_venta1` FOREIGN KEY (`venta_id`) REFERENCES `venta` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
+-- Filtros para la tabla `direccion`
+--
+ALTER TABLE `direccion`
+  ADD CONSTRAINT `fk_direccion_usuario1` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
 -- Filtros para la tabla `producto`
 --
 ALTER TABLE `producto`
@@ -354,6 +378,7 @@ ALTER TABLE `usuario`
 -- Filtros para la tabla `venta`
 --
 ALTER TABLE `venta`
+  ADD CONSTRAINT `fk_venta_direccion1` FOREIGN KEY (`direccion_id`) REFERENCES `direccion` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_venta_usuario1` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 
